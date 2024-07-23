@@ -1,0 +1,19 @@
+.blogItemsMain{
+    padding: 20px 15px 0px 0px;
+}
+.blogItemContainer {
+    box-shadow: 0px 0px 8px #b5d3df;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.bIContainer{
+    overflow: hidden;
+    border-radius: 10px;
+    height: -webkit-fill-available;
+    max-height: 250px;
+}
+
+.bIContainer img {
+    width: 100%
+}

@@ -1,0 +1,12 @@
+.RIContainerMain {
+    padding: 20px;
+    border-radius: 40px;
+    border: 2px solid #b5efc2;
+    margin: 0px 20px
+}
+
+.RIIContainer img {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 100px;
+}

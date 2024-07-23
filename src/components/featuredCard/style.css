@@ -1,0 +1,26 @@
+.fc-image-container{
+    background-color: #FFEED4;
+    padding: 5px 5px 2px 5px;
+    border-radius: 10px;
+}
+
+.fc-image-container img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.fc-title-container{
+    padding: 5px 0px;
+}
+
+.fc-button-container button {
+    padding: 10px 0px 9px 0px;
+    width: 100%;
+    border-radius: 8px;
+    color: white;
+    border: 0px solid;
+}
+
+
+
+

@@ -1,0 +1,76 @@
+.orders-image-container {
+    background-color: #FFEED4;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.oIFrame {
+    max-height: 250px;
+    overflow: hidden;
+    height: -webkit-fill-available;
+    border-radius: 7px;
+}
+
+.orders-image-container img {
+    width: 100%;
+    border-radius: 7px;
+}
+
+.fc-title-container{
+    padding: 5px 0px;
+}
+
+.order-button-container button {
+    padding: 10px 0px 9px 0px;
+    width: 100%;
+    border-radius: 8px;
+    color: white;
+    border: 0px solid;
+    background-color: #0F1C07;
+}
+
+.order-item-container-main{
+    border-radius: 10px;
+}
+
+.orderCheckOutItemContainer{
+    max-width: 370px;
+    box-shadow: 0px 0px 8px rgb(165, 202, 228);
+    border: 0px solid;
+    border-radius: 10px;
+}
+.OCIImageContainer{
+    padding: 5px;
+    padding-bottom: 1px;
+    border-radius: 10px;
+}
+.OCIImageContainer img {
+    width: 100%;
+    border-radius: 5px;
+    min-height: 140px;
+}
+.OCI_Button.BEdit{
+    background: #0F1C07;
+    color: white;
+    width: 100%;
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 0px solid;
+
+}
+.OCI_Button.BRemove{
+    background-color: #FF3131;
+    color: white;
+    width: max-content;
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 0px solid;
+    display: block;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+.p10{
+    padding: 5px !important;
+}
+
+

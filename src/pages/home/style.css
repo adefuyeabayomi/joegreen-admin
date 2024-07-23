@@ -1,0 +1,263 @@
+.hero-section {
+    margin: 0px auto;
+    padding: 40px 20px;
+}
+
+.hero-image {
+    width: 100%;
+    border-radius: 30px;
+    display: block;
+}
+
+.headline {
+    font-size: 55px;
+    margin: 0px;
+}
+
+.hAccentItem{
+    background-color: #FFEED4;
+    color: #A06815;
+    border-radius: 15px;
+    padding: 10px 30px;
+    width: max-content;
+    margin: 0px auto;
+}
+
+.hbcontainer {
+    width: 100%;
+    margin: 0px auto;
+}
+
+.headlinebutton, .moreMenuBtn{
+    background-image: linear-gradient(-196deg, #2d7004, #79c500);
+    padding: 10px 10px;
+    font-size: 12px;
+    color: white;
+    border-radius: 50px;
+    border: 0px solid;
+    width: 100%;
+}
+
+.headlinebutton:hover {
+    cursor: pointer;
+}
+
+.htext-container{
+    padding-right: 20px;
+}
+
+.how_img_speci{
+    width: 53px !important;
+    height: 76px !important;
+}
+
+.HIContainerMain{
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid rgb(220, 220, 220);
+    height: -webkit-fill-available;
+}
+
+@media screen and (max-width: 1100px) {
+    .headline {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .headline {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .htext-container {
+        padding-right: 0px;
+        text-align: center;
+    }
+    .hero-section {
+        padding: 40px 0px;
+    }
+    .hbcontainer {
+    }
+    
+}
+
+@media screen and (min-width: 768px) {
+    .hbcontainer {
+        max-width: 300px;
+        margin-left: 0px;
+    }
+    
+    .hero-section {
+        padding: 40px 0px;
+    }
+    .hAccentItem {
+        margin: 0px;
+    }
+    .htext-container{
+        padding-right: 15px;
+        text-align: left;
+    }
+    
+}
+@media screen and (max-width: 400px) {
+
+    .htext-container {
+        padding-right: 0px;
+        text-align: left;
+    }
+    .hAccentItem{
+        margin: 0px;
+    }
+}
+@media screen and (min-width: 575px) and (max-width: 768px) {
+    .hero-image {
+        max-width: 450px;
+        margin: 0px auto;
+    }
+    .htext-container {
+        max-width: 500px;
+        margin: 0px auto !important;
+    }
+    .himagecontainer {
+        width: max-content;
+    }
+}
+
+/*
+    Featured Dishes
+*/
+
+
+.featuredContents,.howItWorksContents,.reviewsContents,.bannerSectionMain,.contactSectionMain {
+    padding: 50px 0px;
+}
+
+.tipDots {
+    height: 16px;
+    position: relative;
+    top: 1px;
+    z-index: 0;
+}
+.caretIcon {
+    height: 23px;
+    position: relative;
+    top: 3px;
+    z-index: 0;
+}
+
+.tipContent p {
+    padding-right: 10px;
+    margin-top: 0px;
+}
+.sectionHeadlineContainer.features {
+    width: 95%;
+}
+.sectionAfterTextContainer > p {
+    width: 100%;
+}
+
+.fi-content-container.firstchild{
+    margin-top: 15px !important;
+}
+.fi-content-container {
+    margin-top: 40px !important;
+    max-width: 400px;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .fi-content-container {
+        padding-right: 10px;
+        margin-top: 30px !important;
+    }
+    .fi-content-container.firstchild{
+        margin-top: 30px !important;
+    }
+}
+
+@media screen and (min-width: 10248px) {
+    .fi-content-container {
+        padding-right: 20px;
+    }
+}
+
+
+@media (min-width: 700px){
+    .sectionHeadlineContainer.features {
+        width: 80%;
+    }
+        
+    .sectionAfterTextContainer.features > p {
+        width: 70%;
+    }
+}
+
+/*
+    how it works.
+*/
+
+.sectionHeadlineContainer.ease, .sectionAfterTextContainer.ease{
+    width: 80%;
+    margin: 0px auto;
+}
+button.hiw-button-container {
+    padding: 0px 0px;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    border: 0px solid;
+    max-width: 300px;
+    color: white;
+    background-color: #281100;
+}
+
+
+
+/**
+Reviews
+*/
+
+
+
+/**
+CTA Banners
+*/
+
+.ctaBannerContainer{
+    background-image: url(../../assets/banner1.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 16px;
+}
+
+.ctaBIContainer img {
+    width: 100%;
+}
+
+.ctaBIContainer{
+}
+
+.ctaBannerContents{
+    color: white
+}
+.cta-button-container {
+    color: white;
+    background: transparent;
+    border: 1.5px solid white;
+    border-radius: 10px;
+    max-width: 300px;
+    width: 100%;
+    display: block;
+    margin-top: 20px !important;
+    padding: 4px 0px !important;
+}
+/*
+Contact Section
+*/
+
+.contactSectionMain {
+    background-color: #FFF7F2;
+}

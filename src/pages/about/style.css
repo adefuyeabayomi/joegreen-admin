@@ -1,0 +1,18 @@
+.socialIcon {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: 8px;
+}
+.lowerFooter{
+    background-color: #4D3B3B;
+    color: white;
+}
+.about-section-bg{
+    background-color: #ffe0e0;
+}
+@media screen and (min-width: 768px) { 
+    .TItext-content-left, .TIimg-content-left {
+        padding-left: 20px !important;
+    }  
+}

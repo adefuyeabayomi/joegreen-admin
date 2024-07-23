@@ -1,0 +1,40 @@
+
+.jg-overlay-container{
+    position: fixed;
+    width: 0px;
+    height: 100vh;
+    left: 100%;
+    top: 0%;
+    opacity: 0;
+    box-shadow: 0px 0px 10px gray;
+    background-color: #ffffff;
+    transition: all 800ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    z-index: 2;
+    overflow-y: scroll;
+}
+
+.jg-overlay-container.active {
+    left: 30%;
+    top: 0px;
+    opacity: 1;
+    width: 70%;
+    height: 100vh;
+}
+
+.jg-overlay-close-container {
+    width: max-content;
+    float: right;
+    position: absolute;
+}
+
+
+.overlay {
+    position: fixed; /* Sticks the overlay to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent gray */
+    z-index: 1; /* Make sure it appears on top of other content */
+    pointer-events: none; /* Allows clicking through the overlay */
+  }

@@ -1,0 +1,226 @@
+
+@font-face {
+font-family: 'Montserrat';
+src: url('./assets/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'Archivo';
+src: url('./assets/Archivo-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'Bruno Ace';
+src: url('./assets/BrunoAce-Regular.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: 'Quicksand';
+    src: url('./assets/Quicksand/Quicksand-VariableFont_wght.ttf');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body, .no-space {
+    margin: 0px;
+    padding: 0px;
+}
+
+body, button {    
+    font-family: Quicksand,Montserrat, Arial, Helvetica, sans-serif;
+}
+p {
+    margin-bottom: 0px;
+    margin-top: 8px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.font-family-archivo {
+    font-family: 'Archivo';
+}
+
+.font-family-bruno{
+    font-family: 'Bruno Ace'
+}
+
+.font-mini {
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.font-small {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.font-p {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.font-subtitle {
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: -1px;
+}
+
+.font-subtitle-big {
+    font-size: 25px;
+    line-height: 1.5;
+    letter-spacing: -1px;
+}
+
+.font-heading-6, h6 {
+    font-size: 32px;
+    line-height: 1.4;
+    letter-spacing: -1.5px;
+}
+.font-heading-5, h5 {
+    font-size: 40px;
+    line-height: 1.4;
+    letter-spacing: -1.5px;
+}
+.font-heading-4, h4 {
+    font-size: 48px;
+    line-height: 1.4;
+    letter-spacing: -2px;
+}
+.font-heading-3, h3 {
+    font-size: 56px;
+    line-height: 1.4;
+    letter-spacing: -2px;
+}
+.font-heading-2, h2 {
+    font-size: 62px;
+    line-height: 1.4;
+    letter-spacing: -2px;
+}
+.font-header-1, h1 {
+    font-size: 68px;
+    line-height: 1.4;
+    letter-spacing: -2px;
+}
+
+.font-light {
+    font-weight: 400;
+}
+.font-regular {
+    font-weight: 500;
+}
+.font-medium {
+    font-weight: 600;
+}
+.font-bold {
+    font-weight: 700;
+}
+.font-black {
+    font-weight: 900;
+}
+
+.mainSpacing {
+    padding: 3px 80px 3px 80px !important;
+}
+
+.mainVerticalSpace {
+    padding: 50px 0px;
+}
+
+.w-max-content {
+    width: max-content;
+}
+
+.border {
+    border: 1px solid
+}
+
+.border-gray {
+    border: 1px solid rgb(174, 174, 174);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.green-bg {
+    background-color: #EDFFF2;
+}
+.green-color-1 {
+    color: #009F23
+}
+.green-color-2 {
+    color: #00A826;
+}
+.green-color-main, .delicious {
+    color: #00A826;
+}
+.green-bg-main {
+    background-color: #00A826;
+}
+
+.deep-green-bg {
+    background-color: #03351A;
+}
+.deep-green-color {
+    color: #03351A;
+}
+
+.text-main {
+    color: #101D09;
+}
+
+
+.brown {
+    color: #4D3B3B;
+}
+
+.delight {
+    color: #F50057;
+}
+.new-delight {
+    color: #8B3939;
+}
+
+.button-background {
+    color: #281100;
+}
+.white {
+    color: white;
+}
+
+.deep-green {
+    color: #03351A;
+}
+
+.pointer:hover{
+    cursor: pointer;
+}
+
+.center {
+    margin: 0px auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+  
+@media (max-width: 768px) {
+    .mainSpacing {
+        padding: 3px 20px 3px 20px !important;
+    }
+}  
+
+@media (max-width: 1024px) {
+    .mainSpacing {
+        padding: 3px 20px 3px 20px !important;
+    }
+}

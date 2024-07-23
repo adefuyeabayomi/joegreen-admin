@@ -1,0 +1,40 @@
+.ATCContentsContainer{
+
+}
+
+.ATCImageItemContainer{
+    padding: 5px;
+    background-color: #FFF5D3;
+    border-radius: 10px;
+}
+.ATCImageItemContainer img {
+    width: 100%;
+    border-radius: 5px;
+}
+.ATCButton {
+    font-size: 12px;
+    background: #FFE0C9;
+    border: 1px solid #ffc9a2;
+    border-radius: 3px;
+    padding: 3px 10px;
+    margin-right: 5px;
+}
+
+.ATCButton.active{
+    background-color: #ffb47e !important;
+}
+
+.ATCButtonGray{
+    font-size: 12px;
+    background-color: rgb(243, 243, 243);
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    padding: 3px 10px;
+    margin-right: 5px;
+}
+
+
+
+
+
+

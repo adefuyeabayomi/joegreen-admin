@@ -1,0 +1,121 @@
+.header-logo{
+    width: 60px;
+    height: 100%;
+}
+
+.header-container {
+    padding: 5px 80px 6px 80px !important;
+    border: 0px solid;
+    position: fixed;
+    width: 100%;
+    border: 0px solid #d3ffd3;
+    border-bottom-width: 1px;
+    top: 0px;
+    z-index: 1;
+}
+
+.nav-container-desktop {
+    margin-left: 25px;
+}
+
+.h-nav-container{
+    width: 70%;
+}
+
+.header-button {
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    border: 0px solid;
+    font-family: Quicksand;
+}
+.mobile-menu-login {
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    border: 0px solid;
+    width: 100%;
+    font-family: Quicksand;
+}
+.mobile-menu-signin {
+    padding: 10px;
+    border-radius: 50px;
+    color: rgb(60, 98, 65);
+    background-color: #f7fffb;
+    border: 1px solid;
+    width: 100%;
+    font-family: Quicksand;
+}
+
+.header-login-button button{
+    border: 0px solid;
+    background-color: transparent;
+    margin-right: 5px;
+    font-family: Quicksand;
+    font-weight: 600;
+}
+
+.header-button:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 20px #4ecb76;
+    transition: box-shadow 500ms linear;
+}
+
+.width-250 {
+    width: 250px;
+}
+
+.header-link{
+    font-weight: 500 !important;
+}
+
+.header-link{
+    padding: 0px 5px;
+    position: relative;
+    bottom: 0px;
+    transition: all 800ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.mobile-link {
+    border: 1px solid;
+}
+
+.mobile-link:hover{
+    cursor: pointer;
+}
+
+.header-link:hover{
+    cursor: pointer;
+}
+
+.inMenuHamContainerMain {
+    width: max-content;
+    float: right;
+    padding: 30px 30px 0px 0px;
+}
+
+.mobileLinksContainer{
+    padding-left: 20px;
+}
+
+.menu-image-container{
+    width: 50px;
+    height: 50px;
+    background-color: #84F39D;
+    border-radius: 50px;
+    margin-right: 6px;
+}
+@media (max-width: 1024px) {
+    .header-container {
+        padding: 3px 0px 3px 0px !important;
+    }
+    .header-button {
+        padding: 10px;
+        border-radius: 50px;
+        color: white;
+    }
+}
+
+
+
+
