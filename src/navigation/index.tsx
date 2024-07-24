@@ -21,7 +21,6 @@ import Signup from '../pages/SIgnup';
 import PasswordReset from '../pages/PasswordReset';
 
 
-
 function Navigation(): React.JSX.Element {
     return (
         <>

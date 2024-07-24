@@ -23,6 +23,7 @@ export const LoadingContextProvider: React.FC<{ children: React.ReactNode }> = (
     setLoadingState(bool);
     setTimeout(() => {
       setLoadingState(false);
+      setLoadingText('')
     }, 20000);
   };
 

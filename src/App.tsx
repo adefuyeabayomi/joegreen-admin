@@ -1,12 +1,18 @@
 import React,{ useState } from 'react'
-import 'animate.css'
 import Navigation from './navigation'
-//import {authService,profileService} from 'joegreen-service-library'
+import { AuthProvider } from './navigation/AuthContext'
+import { LoadingContextProvider } from './components/utils/loadingContext'
+import AuthService from 'joegreen-service-library'
 function App(): React.JSX.Element {
+  console.log(AuthService)
   return (
-    <>
-      <Navigation />
-    </>
+    <main>
+      <AuthProvider>
+        <LoadingContextProvider>
+          <Navigation />
+        </LoadingContextProvider>
+      </AuthProvider>
+    </main>
   )
 }
 
