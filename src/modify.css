@@ -138,8 +138,19 @@ a {
     border: 1px solid
 }
 
+.util-divider {
+    height: 1.5px;
+    border-radius: 10px;
+    background: #e5e5e5;
+}
+
 .border-gray {
     border: 1px solid rgb(174, 174, 174);
+}
+
+.border-gray-radius {
+    border: 1.7px solid rgb(223, 223, 223);
+    border-radius: 10px;
 }
 
 .w-100 {

@@ -1,10 +1,10 @@
-import React,{ useState } from 'react'
+import React,{ useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Twirl as Hamburger } from 'hamburger-react';
 import Overlay from '../overlay';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart,faUser } from '@fortawesome/free-solid-svg-icons';
 
 import "./style.css"
 import logo from "../../assets/logo.png"
@@ -21,24 +21,24 @@ function Header(): React.JSX.Element {
         return navigate('/')
     }
 
-    function goToOrders () {
-        return navigate('/order')
+    function goToManageOrders () {
+        return navigate('/orders')
     }
 
-    function goToTrainings () {
-        return navigate('/trainings')
+    function goToRecords () {
+        return navigate('/records')
     }
 
-    function goToBlog () {
+    function goToCustomerSupport () {
+        return navigate('/support')
+    }
+
+    function goToManageMenu () {
+        return navigate('/menu')
+    }
+
+    function goToManageBlog () {
         return navigate('/blog')
-    }
-
-    function goToAbout () {
-        return navigate('/about')
-    }
-
-    function goToContact () {
-         navigate('/#contact')
     }
 
     function goToLogin () {
@@ -49,22 +49,8 @@ function Header(): React.JSX.Element {
         navigate('/signup')
     }
 
-    function goToCheckout(){
-        navigate('/checkout')
-    }
-
-    function goToUserOrders(){
-        navigate('/user/orders')
-    }
-    function goToUserAccount(){
-        navigate('/user/account')        
-    }
-    function goToUserTransactionHistory(){
-        navigate('/user/transaction-history')
-    }
-    function goToSupport(){
-        navigate('/support')
-    }
+    
+    
 
     return (
         <div className='container-fluid no-space'>
@@ -81,19 +67,22 @@ function Header(): React.JSX.Element {
                                 <p className='header-link' onClick={goToHome}>Home</p>
                             </div>
                             <div className='w-max-content'>
-                                <p  className='header-link' onClick={goToOrders}>Order</p>
+                                <p className='header-link' onClick={goToManageOrders}>Orders</p>
                             </div>
                             <div className='w-max-content'>
-                                <p className='header-link' onClick={goToTrainings}>Trainings</p>
+                                <p  className='header-link' onClick={goToRecords}>Records</p>
                             </div>
                             <div className='w-max-content'>
-                                <p className='header-link' onClick={goToBlog}>Blog</p>
+                                <p className='header-link' onClick={goToCustomerSupport}>Customer Support</p>
                             </div>
                             <div className='w-max-content'>
-                                <p className='header-link' onClick={goToAbout}>About Us</p>
+                                <p className='header-link' onClick={goToManageMenu}>Menu</p>
                             </div>
                             <div className='w-max-content'>
-                                <p className='header-link' onClick={goToContact}>Contact</p>
+                                <p className='header-link' onClick={goToManageBlog}>Blog</p>
+                            </div>
+                            <div className='w-max-content'>
+                                <p className='header-link' onClick={()=>{}}>Analytics</p>
                             </div>
                         </div>
                     </div>
@@ -105,7 +94,7 @@ function Header(): React.JSX.Element {
                             <button onClick={()=>{goToLogin()}} className='pointer font-regular text-main'>Login</button>
                         </div>
                         <div className='w-max-content button-container no-space'>
-                            <button onClick={goToCheckout} className='green-bg-main header-button'>Checkout <FontAwesomeIcon icon={faShoppingCart} /> </button>
+                            <button onClick={goToSignup} className='green-bg-main header-button'>Sign Up <FontAwesomeIcon icon={faUser} /> </button>
                         </div>
                     </div>
                 </div>
@@ -125,53 +114,37 @@ function Header(): React.JSX.Element {
                             </div>
                             <div className='mobileLinksContainer'>
                                 <div>
-                                    <p className='font-p font-medium'>Site Main Pages</p>
+                                    <p className='font-p font-medium'>Management Activities</p>
                                     <p className='font-small font-regular pointer' onClick={()=>{
                                         setOpen(!isOpen)
                                         goToHome()
                                     }}>Home</p>
                                     <p className='font-small font-regular pointer' onClick={()=>{
                                         setOpen(!isOpen)
-                                        goToOrders()
-                                    }}>Order</p>
+                                        goToManageOrders()
+                                    }}>Orders</p>
                                     <p className='font-small font-regular pointer' onClick={()=>{
                                         setOpen(!isOpen)
-                                        goToTrainings()
-                                    }}>Training</p>
+                                        goToRecords()
+                                    }}>Records</p>
                                     <p className='font-small font-regular pointer' onClick={()=>{
                                         setOpen(!isOpen)
-                                        goToAbout()
-                                    }}>About Us</p>
+                                        goToCustomerSupport()
+                                    }}>Customer Support</p>
                                     <p className='font-small font-regular pointer' onClick={()=>{
                                         setOpen(!isOpen)
-                                        goToContact()
-                                    }}>Contact Us</p>
+                                        goToManageMenu()
+                                    }}>Menu</p>
                                     <p className='font-small font-regular pointer' onClick={()=>{
                                         setOpen(!isOpen)
-                                        goToBlog()
+                                        goToManageBlog()
                                     }}>Blog</p>
+                                    <p className='font-small font-regular pointer' onClick={()=>{
+                                        setOpen(!isOpen)
+                                    }}>Analytics</p>
                                 </div>
                                 <div className='py-1' />
-                                <div>
-                                    <p className='font-p font-medium'>My Account</p>
-                                    <p className='font-small font-regular pointer' onClick={()=>{
-                                        setOpen(!isOpen)
-                                        goToUserOrders()
-                                    }}>My Orders</p>
-                                    <p className='font-small font-regular pointer' onClick={()=>{
-                                        setOpen(!isOpen)
-                                        goToUserTransactionHistory()
-                                    }}>Transactions History</p>
-                                    <p className='font-small font-regular pointer' onClick={()=>{
-                                        setOpen(!isOpen)
-                                        goToUserAccount()
-                                    }}>Account Settings</p>
-                                    <p className='font-small font-regular pointer' onClick={()=>{
-                                        setOpen(!isOpen)
-                                        goToSupport()
-                                    }}>Support Page</p>
-                                </div>
-                            </div>                            
+                            </div>
                             <div className='py-3' />
                                 <div className='no-space px-3 py-2'>
                                     <button onClick={()=>{goToLogin(); setOpen(!isOpen)}} className='green-bg-main mobile-menu-login font-small font-regular'>Login <FontAwesomeIcon icon={faShoppingCart} /> </button>

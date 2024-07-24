@@ -2,7 +2,7 @@ import React,{useState} from "react";
 
 import './style.css'
 
-export function Blog (): React.JSX.Element {
+export function ManageMenu (): React.JSX.Element {
     return (
         <div>
             <div className="mainSpacing">
