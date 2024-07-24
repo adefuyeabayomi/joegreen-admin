@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 import './style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +9,12 @@ import image1 from '../../assets/image23.png'
 let image = <img src={image1} />
 
 export function Blog (): React.JSX.Element {
+    let navigate = useNavigate()
+    
+    function goToCreatePost(){
+        navigate('/create-blog')
+    }
+
     return (
         <div>
             <div className="mainSpacing">
@@ -26,7 +33,7 @@ export function Blog (): React.JSX.Element {
                                     <div className="row no-space align-items-center">
                                     <div className="w-max-content no-space">
                                     <p className="font-p font-regular no-space">
-                                        <button onClick={()=>{}} className="vi-button px-2 px-sm-3 px-md-4 px-lg-5">Add New Post <FontAwesomeIcon icon={faPlus}/></button>
+                                        <button onClick={goToCreatePost} className="vi-button px-2 px-sm-3 px-md-4 px-lg-5">Add New Post <FontAwesomeIcon icon={faPlus}/></button>
                                     </p>
                                     </div>
                                     </div>
