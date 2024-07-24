@@ -29,13 +29,20 @@ export function CreateCategory (): React.JSX.Element {
                         <div className="py-1" />
                         <div className="util-divider" />
                     </div>
-                    <div className="py-1" />
+                    <div className="py-2" />
                     <div className="p-2 border-gray-radius">
                         <div>
                             <p className="font-small no-space">Value</p>
                             <div className="py-1" />
                             <InputMain value="" onChange={()=>{}} icon={<FontAwesomeIcon icon={faEye}/>}/>
                         </div>
+                        <div className="py-1" />
+                        <div>
+                            <p className="font-small no-space">Value</p>
+                            <div className="py-1" />
+                            <InputMain value="" onChange={()=>{}} icon={<FontAwesomeIcon icon={faEye}/>}/>
+                        </div>
+                        <div className="py-1" />
                         <div>
                             <p className="font-p my-2 my-sm-1 font-regular mx-1 mx-sm-1 no-space">
                                 <button onClick={()=>{}} className="vi-button px-2">Publish Category <FontAwesomeIcon icon={faEye}/></button>
