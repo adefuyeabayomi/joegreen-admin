@@ -11,7 +11,9 @@ import { ManageOrders } from '../pages/orders';
 import { OrderRecords } from '../pages/records';
 import { CustomerSupport } from '../pages/support';
 import { ViewOrder } from '../pages/viewOrder';
-
+import { CreateDish } from '../pages/CreateDish';
+import { CreateCategory } from '../pages/CreateCategory';
+import { MenuCategory } from '../pages/MenuCategory';
 import ForgotPassword from '../pages/Forgotpassword';
 import Login from '../pages/Login';
 import Signup from '../pages/SIgnup';
@@ -31,6 +33,9 @@ function Navigation(): React.JSX.Element {
                     <Route path='/view-order' Component={ViewOrder} />
                     <Route path='/records' Component={OrderRecords} />
                     <Route path='/menu' Component={ManageMenu} />
+                    <Route path='/menu-category' Component={MenuCategory} />
+                    <Route path='/create-category' Component={CreateCategory} />
+                    <Route path='/create-dish' Component={CreateDish} />
                     <Route path='/support' Component={CustomerSupport} />
                     <Route path='/blog' Component={Blog} />
                     <Route path='/login' Component={Login} />

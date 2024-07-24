@@ -1,10 +1,7 @@
 .blogItemsMain{
-    padding: 20px 15px 0px 0px;
+    padding: 10px;
 }
 .blogItemContainer {
-    box-shadow: 0px 0px 8px #b5d3df;
-    padding: 12px;
-    border-radius: 10px;
 }
 
 .bIContainer{

@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import './style.css'
 import blogImg from '../../assets/trainingHero.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faLocationArrow,faEye,faPen } from '@fortawesome/free-solid-svg-icons';
 
 interface FeaturedCardPropType {
     image?: React.JSX.Element | string,
@@ -30,9 +30,20 @@ export function BlogItem ({image,title,actionFn, description=''}: FeaturedCardPr
                 <div className='py-1'></div>
                 <div className="font-small font-medium">Published on 24th July, 2024</div>
                 <div className='py-1'></div>
-                <div className='order-button-container'>
-                    <button className='pointer' onClick={actionFn}>Read Full Post <FontAwesomeIcon icon={faLocationArrow} /></button>
-                </div>  
+                <div className="container-fluid no-space">
+                <div className="row no-space">
+                    <div className="col-12 col-sm-6 no-space">
+                        <p className="font-p font-regular no-space my-2 my-sm-1 mx-1 mx-sm-1 ">
+                            <button onClick={()=>{}} className="vi-button px-2">Edit Post <FontAwesomeIcon icon={faPen}/></button>
+                        </p>
+                    </div>
+                    <div className="col-12 col-sm-6 no-space">
+                        <p className="font-p my-2 my-sm-1  font-regular mx-1 mx-sm-1 no-space">
+                            <button onClick={()=>{}} className="vi-button green-linear px-2">Publish Post <FontAwesomeIcon icon={faEye}/></button>
+                        </p>
+                    </div>
+                </div>
+            </div>  
                 </div>
             </div>
         </div>

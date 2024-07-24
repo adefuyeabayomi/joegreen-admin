@@ -33,8 +33,8 @@ export function CustomerSupport (): React.JSX.Element {
                 <div className="row no-space">
                     <div className="py-2" />
                 <p className="font-p font-regular no-space">
-                                    <button onClick={closeDialog} className="vi-button">Send Reply</button>
-                                    </p>
+                    <button onClick={closeDialog} className="vi-button">Send Reply</button>
+                </p>
                 </div>
             </div>
             <div className="py-2" />

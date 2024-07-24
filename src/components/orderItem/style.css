@@ -1,8 +1,3 @@
-.orders-image-container {
-    background-color: #FFEED4;
-    border-radius: 12px;
-    padding: 10px;
-}
 
 .oIFrame {
     max-height: 250px;
@@ -18,6 +13,14 @@
 
 .fc-title-container{
     padding: 5px 0px;
+}
+
+.orders-image-container {
+    border-radius: 12px;
+    padding: 10px;
+}
+.order-content-container{
+    padding: 10px;
 }
 
 .order-button-container button {

@@ -179,9 +179,18 @@ a {
 .deep-green-color {
     color: #03351A;
 }
+.green-linear{
+    background-image: linear-gradient(-196deg, #2d7004, #79c500);
+}
+.green-linear-color{
+    color: linear-gradient(-196deg, #2d7004, #79c500);
+}
 
 .text-main {
     color: #101D09;
+}
+.shadow{
+   box-shadow: 0px 0px 8px #ced8e7;
 }
 
 
