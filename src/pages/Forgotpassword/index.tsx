@@ -31,9 +31,9 @@ export default function ForgotPassword (): React.JSX.Element {
         <div>
             <div className="mainSpacing">
                 <div className="py-3" />
-                <div className="container-fluid MFormContainer">
-                    <div className="row no-space">
-                        <div className="col-12 col-sm-6 no-space">
+                <div className="container-fluid">
+                    <div className="row no-space justify-content-center">
+                        <div className="col-12 col-sm-8 no-space col-lg-8 MFormContainer">
                             <div className="loginFormContainer">
                                 <div className="py-4" />
                                 <h3 className="font-heading-6 text-center no-space green-color-main">PASSWORD RECOVERY</h3>
@@ -54,24 +54,6 @@ export default function ForgotPassword (): React.JSX.Element {
 
                                 <div className="py-5" />
                             </div>
-                        </div>
-                        <div className="formSupport col-12 col-sm-6 no-space align-items-center row">
-                        <div className="py-5 py-md-0" />
-                            <div className="py-5 py-md-0" />
-                            <div>
-                                <div className="center text-center" style={{width: '80%'}}>
-                                    <h4 style={{color: 'white'}} className="font-heading-6 text center">For Further Assistance, Reach out to us via our support page.</h4>
-                                </div>
-                                <div className="center">
-                                    <button className="FSupportButton font-medium pointer" onClick={goToSupport}>Go To Support Page</button>
-                                </div>
-                                <div className="py-1" />
-                                <div className="center">
-                                    <button className="FSupportButton font-medium pointer" onClick={goToLogin}>Login</button>
-                                </div>
-                            </div>
-                            <div className="py-5 py-md-0" />
-                            <div className="py-5 py-md-0" />
                         </div>
                     </div>
                 </div>

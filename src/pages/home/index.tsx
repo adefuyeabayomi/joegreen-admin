@@ -1,6 +1,6 @@
 import React,{ useState,useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
-import { animateScroll as scroll, Element } from 'react-scroll';
+import { animateScroll as scroll } from 'react-scroll';
 import scrollToElement from 'scroll-to-element';
 import HowItem from '../../components/HowItem';
 //images
@@ -12,9 +12,6 @@ import './style.css'
 function Home(): React.JSX.Element {    
     const navigate = useNavigate()
     const location = useLocation();
-    function goToHome () {
-        return navigate('/')
-    }
 
     function goToManageOrders () {
         return navigate('/orders')
@@ -40,26 +37,11 @@ function Home(): React.JSX.Element {
         navigate('/login')
     }
 
-    function goToSignup(){
-        navigate('/signup')
-    }
-
-
       useEffect(() => {
-        console.log({location})
-        if (location.hash === '#contact') {
-            scrollToElement('#contact', {
-                offset: -100,
-                ease: 'in-out-sine',
-                duration: 1500
-            })
-        }
-        else {
         scroll.scrollToTop({
           duration: 1500, // duration of the scrolling animation in milliseconds
           smooth: 'easeInOutQuart', // the type of easing
         });
-        }
       }, [location])
 
     return (

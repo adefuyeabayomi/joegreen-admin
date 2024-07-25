@@ -9,14 +9,16 @@
     height: 35px;
     border-radius: 10px;
     padding: 2px 31px 0px 9px;
-    color:rgb(137, 137, 137);
+    color:rgb(77, 77, 77);
     font-weight: 500;
 }
 
-.inputIconContainer input::placeholder{
-    color: rgb(204, 204, 204);
+
+.JGInputMain::placeholder{
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 300;
+    color: rgb(170, 170, 170);
+    letter-spacing: 0.3px;
 }
 
 .inputIconContainer input:active{
@@ -51,3 +53,8 @@
     margin-bottom: 9px;
 }
 
+.error-message-container p {
+    color: rgb(249 86 86);
+    margin-top: 7px !important;
+    font-weight: 500;
+}

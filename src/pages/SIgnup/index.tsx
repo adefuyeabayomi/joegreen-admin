@@ -1,26 +1,65 @@
-import React,{useState} from "react";
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { authService } from "joegreen-service-library";
+import { isValidEmail, generateRandomString, isStringLengthGreaterThan } from "../../functions/utils";
 import { InputMain } from "../../components/input";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import { faAt, faEye } from '@fortawesome/free-solid-svg-icons';
+import './style.css';
+import { useLoading } from "../../components/utils/loadingContext";
+import { useAuth } from "../../navigation/AuthContext";
 
-import './style.css'
+import facebookIcon from '../../assets/icons8-facebook.svg'
+import googleIcon from '../../assets/icons8-google.svg'
+import xIcon from '../../assets/icons8-x.svg'
 
-export default function Signup (): React.JSX.Element { 
-    const navigate = useNavigate()
-    let [email,setEmail] = useState('')
-    let [password,setPassword] = useState('')
-    function goToLogin () {
-        navigate('/login')
+export default function Signup(): React.JSX.Element {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { setLoading, setLoadingText } = useLoading();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+
+  const resetEmailError = () => {
+    setEmailError(false);
+  };
+
+  const resetPasswordError = () => {
+    setPasswordError(false);
+  };
+
+  function goToLogin() {
+    navigate('/login');
+  }
+
+  async function signup() {
+    // Validate inputs
+    if (!isValidEmail(email)) {
+      setEmailError(true);
+      return;
     }
 
-    function goToSignup(){
-        navigate('/signup')
+    if (!isStringLengthGreaterThan(password, 7)) {
+      setPasswordError(true);
+      return;
     }
-    function goToForgotPassword(){
-        navigate('/forgot-password')
+
+    // If inputs are valid, proceed with signup
+    setLoading(true);
+    setLoadingText("Signing up...");
+
+    try {
+      const response = await authService.adminSignup(email, password);
+      login(response.token);
+      navigate('/');
+    } catch (error) {
+      console.error("Signup error:", error);
+    } finally {
+      setLoading(false);
     }
+  }
     return (
         <div>
             <div className="mainSpacing">
@@ -34,35 +73,35 @@ export default function Signup (): React.JSX.Element {
                                 <p className="font-p no-space text-center font-regular">Please input your valid credentials</p>
                                 <div className="py-2" />
                                 <div>
-                                    <InputMain icon={<FontAwesomeIcon color="#aeaeae" icon={faEnvelope} />} value={email} onChange={setEmail} placeholder={'UserID/Email'} />
+                                    <InputMain onFocus={resetEmailError} showError={emailError} errorMessage="Email is invalid" icon={<FontAwesomeIcon color="#aeaeae" icon={faAt} />} value={email} onChange={setEmail} placeholder={'UserID/Email'} />
                                 </div>
                                 <div className="py-1" />
                                 <div>
-                                    <InputMain icon={<FontAwesomeIcon color="#aeaeae" icon={faEnvelope} />} value={''} onChange={setEmail} placeholder={'Password'} />
+                                    <InputMain onFocus={resetPasswordError} type="password" showError={passwordError} errorMessage="Password must be at least 8 characters." value={password} onChange={setPassword} placeholder={'Password'} />
                                 </div>                
                                 <div className="py-2" />
                                 <div className='no-space'>
-                                    <button onClick={()=>{}} className='pointer green-bg-main login-button '>Create Account</button>
+                                    <button onClick={signup} className='pointer green-bg-main login-button '>Create Account</button>
                                 </div>
                                 <div className="py-2" />
                                 <div className="green-divider"></div>
                                 <div className="py-2" />
                                 <div className="socialButtonContainer pointer container-fluid">
                                     <div className="row no-space align-items-center">
-                                        <div className="w-max-content no-space">G</div>
-                                        <div className="col no-space font-small">Signin With Google</div>
+                                        <div className="w-max-content no-space"><img className="sIcon" src={googleIcon} /></div>
+                                        <div className="col px-1 font-small">Signin With Google</div>
                                     </div>
                                 </div>
                                 <div className="socialButtonContainer pointer container-fluid">
                                     <div className="row no-space align-items-center">
-                                        <div className="w-max-content no-space">F</div>
-                                        <div className="col no-space font-small">Signin With Facebook</div>
+                                        <div className="w-max-content no-space"><img className="sIcon" src={facebookIcon} /></div>
+                                        <div className="col px-1 font-small">Signin With Facebook</div>
                                     </div>
                                 </div>  
                                 <div className="socialButtonContainer pointer container-fluid">
                                     <div className="row no-space align-items-center">
-                                        <div className="w-max-content no-space">A</div>
-                                        <div className="col no-space font-small">Signin With Apple</div>
+                                        <div className="w-max-content no-space"><img className="sIcon" src={xIcon} /></div>
+                                        <div className="col px-1 font-small">Signin With Apple</div>
                                     </div>
                                 </div>
                                 <div className="py-2" />

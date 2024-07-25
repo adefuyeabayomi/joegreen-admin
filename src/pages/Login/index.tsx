@@ -1,27 +1,79 @@
 import React,{useState} from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { InputMain } from "../../components/input";
-
+import { useAuth } from "../../navigation/AuthContext";
+import { useLoading } from "../../components/utils/loadingContext";
+import { isValidEmail, generateRandomString, isStringLengthGreaterThan } from "../../functions/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import {faAt, faEnvelope} from '@fortawesome/free-solid-svg-icons'
+
+import facebookIcon from '../../assets/icons8-facebook.svg'
+import googleIcon from '../../assets/icons8-google.svg'
+import xIcon from '../../assets/icons8-x.svg'
 
 import './style.css'
+import { authService } from "joegreen-service-library";
 
-export default function Login (): React.JSX.Element { 
-    const navigate = useNavigate()
-    let [email,setEmail] = useState('')
-    let [password,setPassword] = useState('')
+export default function Login (): React.JSX.Element {
+    const navigate = useNavigate();
+    const { login } = useAuth();
+    const { setLoading, setLoadingText } = useLoading();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [emailError, setEmailError] = useState<boolean>(false);
+    const [passwordError, setPasswordError] = useState<boolean>(false);
+
+    const resetEmailError = () => {
+        setEmailError(false);
+      };
     
-    function goToLogin () {
-        navigate('/login')
-    }
-
+      const resetPasswordError = () => {
+        setPasswordError(false);
+      };
+    
     function goToSignup(){
         navigate('/signup')
     }
     function goToForgotPassword(){
         navigate('/forgot-password')
     }
+
+    async function sendLogin() {
+        // Validate inputs
+        if (!isValidEmail(email)) {
+          setEmailError(true);
+          return;
+        }
+    
+        if (!isStringLengthGreaterThan(password, 7)) {
+          setPasswordError(true);
+          return;
+        }
+    
+        // If inputs are valid, proceed with signup
+        setLoading(true);
+        setLoadingText("Logging in...");
+    
+        try {
+          const response = await authService.login(email, password);
+          login(response.token);
+          navigate('/');
+        } catch (error) {
+          console.error("Login error:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+
+    async function handleResendVerificationEmail(email) {
+        try {
+          const response = await authService.resendVerificationEmail(email);
+          console.log('Verification email sent:', response);
+        } catch (error) {
+          console.error('Error resending verification email:', error.message);
+        }
+      }
+
     return (
         <div>
             <div className="mainSpacing">
@@ -35,15 +87,15 @@ export default function Login (): React.JSX.Element {
                                 <p className="font-p no-space text-center font-regular">Please input your valid credentials</p>
                                 <div className="py-2" />
                                 <div>
-                                    <InputMain icon={<FontAwesomeIcon color="#aeaeae" icon={faEnvelope} />} value={email} onChange={setEmail} placeholder={'UserID/Email'} />
+                                    <InputMain onFocus={resetEmailError} showError={emailError} errorMessage="Email is invalid" icon={<FontAwesomeIcon color="#aeaeae" icon={faAt} />} value={email} onChange={setEmail} placeholder={'UserID/Email'} />
                                 </div>
                                 <div className="py-1" />
                                 <div>
-                                    <InputMain icon={<FontAwesomeIcon color="#aeaeae" icon={faEnvelope} />} value={''} onChange={setEmail} placeholder={'Password'} />
-                                </div>                
+                                    <InputMain onFocus={resetPasswordError} type="password" showError={passwordError} errorMessage="Password must be at least 8 characters." value={password} onChange={setPassword} placeholder={'Password'} />
+                                </div>                  
                                 <div className="py-2" />
                                 <div className='no-space'>
-                                    <button onClick={()=>{}} className='pointer green-bg-main login-button '>Login</button>
+                                    <button onClick={sendLogin} className='pointer green-bg-main login-button '>Login</button>
                                 </div>
                                 <div className="py-2" />
                                 <div>
@@ -54,20 +106,20 @@ export default function Login (): React.JSX.Element {
                                 <div className="py-2" />
                                 <div className="socialButtonContainer pointer container-fluid">
                                     <div className="row no-space align-items-center">
-                                        <div className="w-max-content no-space">G</div>
-                                        <div className="col no-space font-small">Signin With Google</div>
+                                        <div className="w-max-content no-space"><img className="sIcon" src={googleIcon} /></div>
+                                        <div className="col px-1 font-small">Signin With Google</div>
                                     </div>
                                 </div>
                                 <div className="socialButtonContainer pointer container-fluid">
                                     <div className="row no-space align-items-center">
-                                        <div className="w-max-content no-space">F</div>
-                                        <div className="col no-space font-small">Signin With Facebook</div>
+                                        <div className="w-max-content no-space"><img className="sIcon" src={facebookIcon} /></div>
+                                        <div className="col px-1 font-small">Signin With Facebook</div>
                                     </div>
                                 </div>  
                                 <div className="socialButtonContainer pointer container-fluid">
                                     <div className="row no-space align-items-center">
-                                        <div className="w-max-content no-space">A</div>
-                                        <div className="col no-space font-small">Signin With Apple</div>
+                                        <div className="w-max-content no-space"><img className="sIcon" src={xIcon} /></div>
+                                        <div className="col px-1 font-small">Signin With Apple</div>
                                     </div>
                                 </div>
                                 <div className="py-2" />
@@ -82,6 +134,10 @@ export default function Login (): React.JSX.Element {
                                 </div>
                                 <div className="center">
                                     <button className="FSupportButton font-medium pointer" onClick={goToSignup}>Sign Up</button>
+                                </div>
+                                <div className="py-2"></div>
+                                <div className="center">
+                                    <button className="FSupportButton font-medium pointer" onClick={()=>handleResendVerificationEmail('adefuyeabayomi16@gmail.com')}>Resend Verification Mail</button>
                                 </div>
                             </div>
                             <div className="py-5 py-md-0" />

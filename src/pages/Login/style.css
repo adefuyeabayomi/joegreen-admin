@@ -1,11 +1,12 @@
-
 .loginFormContainer{
     padding: 15px;
 }
+
 .formSupport {
     background-image: url('../../assets/login-bg.png');
     background-size: cover;
 }
+
 .FSupportButton{
     width: 70%;
     padding: 10px 10px 12px 10px;
@@ -17,9 +18,14 @@
     margin-top: 10px;
     color: white;
 }
+
 .MFormContainer {
-    box-shadow: 0px 0px 8px #c9ffd2;
+    box-shadow: 0px 0px 8px #CFCFCF;
     border-radius: 10px;
     padding: 0px !important;
     overflow: hidden;
+}
+
+.sIcon{
+    width: 24px;
 }
