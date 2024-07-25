@@ -1,31 +1,54 @@
 import React,{useState} from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { InputMain } from "../../components/input";
+import { useSearchParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
 
+import { isValidEmail, generateRandomString, isStringLengthGreaterThan } from "../../functions/utils";
+import { authService } from "joegreen-service-library";
+
+import { useLoading } from "../../components/utils/loadingContext";
+import { useAuth } from "../../navigation/AuthContext";
+
 import './style.css'
 
-export default function PasswordReset (): React.JSX.Element { 
-    const navigate = useNavigate()
-    let [email,setEmail] = useState('')
-    let [password,setPassword] = useState('')
+export default function PasswordReset (): React.JSX.Element {   
+    const navigate = useNavigate();
+    const { setLoading, setLoadingText } = useLoading();
+    const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState<boolean>(false);
+    const [searchParams] = useSearchParams();
+    const resetToken = searchParams.get('resetToken'); // Replace 'someParam' with your query parameter key
+  console.log({resetToken})
+    const resetPasswordError = () => {
+      setPasswordError(false);
+    };
+
     function goToLogin () {
         navigate('/login')
     }
 
-    function goToSignup(){
-        navigate('/signup')
-    }
-    
-    function goToForgotPassword(){
-        navigate('/forgot-password')
-    }
+    async function resetPassword() {
 
-    function goToSupport(){
-        navigate('/support')
-    }
+        if (!isStringLengthGreaterThan(password, 7)) {
+          setPasswordError(true);
+          return;
+        }
+    
+        // If inputs are valid, proceed with signup
+        setLoading(true);
+        setLoadingText("Updating Password...");
+        try {
+          const response = await authService.resetPassword(resetToken,password);
+          navigate('/');
+        } catch (error) {
+          console.error("Error Updating Password:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
 
     return (
         <div>
@@ -39,13 +62,12 @@ export default function PasswordReset (): React.JSX.Element {
                             <p className="font-p no-space text-center font-regular">Create a new password for your account. Make sure it is a strong password to improve your account security</p>
                             <div className="py-2" />
                             <div>
-                                <InputMain icon={<FontAwesomeIcon color="#aeaeae" icon={faEnvelope} />} value={email} onChange={setEmail} placeholder={'New Password'} />
+                                <InputMain onFocus={resetPasswordError} type="password" showError={passwordError} errorMessage="Password must be at least 8 characters." value={password} onChange={setPassword} placeholder={'Password'} />
                             </div>               
                             <div className="py-2" />
                             <div className='no-space'>
-                                <button onClick={()=>{}} className='pointer green-bg-main login-button'>Reset Password</button>
+                                <button onClick={resetPassword} className='pointer green-bg-main login-button'>Reset Password</button>
                             </div>
-                            <div className="py-2" />
                             <div className="py-5" />
                         </div>
                     </div>
