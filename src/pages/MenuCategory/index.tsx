@@ -1,22 +1,73 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 import './style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import OrderItem from "../../components/orderItem";
+import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
+import { dishService } from "joegreen-service-library";
+import { useLoading } from "../../components/utils/loadingContext";
+import { useSearchParams } from "react-router-dom";
 import image26 from '../../assets/image26.png'
+import { Dish } from "joegreen-service-library/dist/services/dishService";
+
 let image = <img src={image26}/>
 export function MenuCategory (): React.JSX.Element {
     let navigate = useNavigate()
+    let {triggerError,triggerSuccess} = useNotificationTrigger()
+    let {setLoading,setLoadingText} = useLoading()
+    let [dishes,setDishes] = useState<Dish[]>([])
+    let [category,setCategory] = useState<Dish>()
+    const [searchParams] = useSearchParams();
+    let id = searchParams.get('id')
     
     function goToCreateCategory(){
         navigate('/create-category')
     }
 
     function goToCreateDish(){
-        navigate('/create-dish')
+        navigate('/create-dish?category='+id)
     }
+
+    const getDishes = async () => {
+        try {
+            setLoading(true);
+            setLoadingText('Fetching Dishes...');
+                let data = await dishService.getDishes({category: id});
+                setDishes(data)
+                console.log({dishes: data})
+                triggerSuccess({ title: 'Success', message: 'Dishes Fetched successfully' });
+        } catch (error) {
+            triggerError({ title: 'Error', message: 'Failed to retrieve Dishes' });
+            console.error({error})
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(()=>{
+        getDishes()
+    },[])
+    
+    const getCategory = async () => {
+        try {
+            setLoading(true);
+            setLoadingText('Fetching Dishes...');
+                let data = await dishService.getCategoryById(id);
+                setCategory(data)
+                console.log({data})
+                triggerSuccess({ title: 'Success', message: 'Category Fetched successfully' });
+        } catch (error) {
+            triggerError({ title: 'Error', message: 'Failed to retrieve category data' });
+            console.error({error})
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(()=>{
+        getCategory()
+    },[])
+
     return (
         <div>
             <div className="mainSpacing">
@@ -27,7 +78,7 @@ export function MenuCategory (): React.JSX.Element {
                         <div className="row no-space align-items-center justify-content-center">
                             <div className="col-12 text-center no-space">
                                 <div>
-                                    <p className="font-heading-6 font-medium green-color-main">CRAVINGS</p>
+                                    <p className="font-heading-6 font-medium green-color-main">{category? category.name : ''}</p>
                                 </div>
                                 <div className="util-divider" />
                                 <div className="py-1" />
@@ -63,11 +114,11 @@ export function MenuCategory (): React.JSX.Element {
                     <div className="dish-item-container py-2">
                         <div className="container-fluid no-space">
                             <div className="row  no-space">
-                                {[1,2,3,4,5].map(x=>{
+                                {dishes.map(x=>{
                                     return (
-                                        <div className="col-12 col-md-6">
+                                        <div key={x._id} className="col-12 col-md-6">
                                             <div className="shadow border-gray-radius my-2">
-                                                <OrderItem title="White Rice and Stew" actionFn={()=>{}} price="2500" description="This option is for white rice and stew. It comes with one beef. You can then choose to add more beef, chicken or turkey at additional charges." image={image}/>
+                                                <OrderItem title={x.name} actionFn={()=>{}} price={String(x.price)} description={x.description} image={x.image}/>
                                             </div>
                                         </div>                                        
                                     )

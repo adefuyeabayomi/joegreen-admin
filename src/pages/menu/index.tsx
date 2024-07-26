@@ -1,20 +1,53 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
-import './style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Dish } from "joegreen-service-library/dist/services/dishService";
+
+import './style.css'
+import OrderItem from "../../components/orderItem";
+import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
+import { dishService } from "joegreen-service-library";
+import { useLoading } from "../../components/utils/loadingContext";
+
+import image26 from '../../assets/image26.png'
+let image = <img src={image26}/>
 
 export function ManageMenu (): React.JSX.Element {
     let navigate = useNavigate()
-    
-    function goToMenuCategory(){
-        navigate('/menu-category')
+    let {triggerError,triggerSuccess} = useNotificationTrigger()
+    let {setLoading,setLoadingText} = useLoading()
+    let [categories,setCategories] = useState<Dish[]>([])
+    const getCategories = async () => {
+        try {
+            setLoading(true);
+            setLoadingText('Fetching Dishes...');
+                let data = await dishService.getAllCategory();
+                setCategories(data)
+                console.log({data})
+                triggerSuccess({ title: 'Success', message: 'Category Fetched successfully' });
+        } catch (error) {
+            triggerError({ title: 'Error', message: 'Failed to retrieve category data' });
+            console.error({error})
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(()=>{
+        getCategories()
+    },[])
+    function goToMenuCategory(id:string){
+        navigate('/menu-category?id='+id)
     }
     function goToCreateCategory(){
         navigate('/create-category')
     }
- 
+    interface Category {
+        name: string;
+        description: string;
+        _id: string
+    }
 
     return (
         <div>
@@ -48,32 +81,32 @@ export function ManageMenu (): React.JSX.Element {
                     <div className="menu-cat-container">
                     <div className="py-1" />
                     <div className="container-fluid no-space">
-                        <div className="row no-space">
-                            {[1,2,3,4].map((x,index)=>{
-                                return (
-                                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <div className="cat-container p-2 my-2 border-gray-radius">
-                                            <div className="">
-                                                <p className="font-subtitle font-medium green-color-main no-space">Cravings</p>
-                                            </div>
-                                            <div className="">
-                                                <p className="font-p no-space">Satisfy your sweet tooth.</p>
-                                            </div>
-                                            <p className="font-p font-regular no-space my-2 my-sm-1 mx-0 mx-sm-1 ">
-                                                <button onClick={goToMenuCategory} className="vi-button px-2 px-sm-3 px-md-4 px-lg-5">View Category</button>
-                                            </p>
-                                        </div>
-                                    </div>                                    
-                                )
-                            })}
-
-                        </div>
+                    <div className="row no-space">
+                        {categories.map((x, index) => (
+                            <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div className="cat-container p-2 my-2 border-gray-radius">
+                                    <div>
+                                        <p className="font-subtitle font-medium green-color-main no-space">{x.name}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-p no-space">{x.description}</p>
+                                    </div>
+                                    <p className="font-p font-regular no-space my-2 my-sm-1 mx-0 mx-sm-1">
+                                        <button onClick={() => goToMenuCategory(x._id)} className="vi-button px-2 px-sm-3 px-md-4 px-lg-5">
+                                            View Category
+                                            <FontAwesomeIcon icon={faEye} />
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     </div>
                 </div>
                 <div className="py-3" />
             </div>
         </div>
+    </div>
     )
 }
 

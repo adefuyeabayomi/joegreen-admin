@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import scrollToElement from 'scroll-to-element';
 import HowItem from '../../components/HowItem';
+import {useAuth} from '../../navigation/AuthContext'
 //images
 import tipDots from '../../assets/tipDots.png'
 import caretWhite from '../../assets/caret-white.png'
@@ -10,6 +11,7 @@ import caretWhite from '../../assets/caret-white.png'
 import './style.css'
 
 function Home(): React.JSX.Element {    
+    const auth = useAuth()
     const navigate = useNavigate()
     const location = useLocation();
 
@@ -54,12 +56,19 @@ function Home(): React.JSX.Element {
                             <p className='font-subtitle d-md-none font-bold text-center'>JOEGREEN CAFETERIA ADMIN MANAGEMENT PORTAL.</p>
                             <p className='font-heading-6 d-none d-md-block font-bold text-center'>JOEGREEN CAFETERIA ADMIN MANAGEMENT PORTAL.</p>
                             <p className='font-p font-regular text-center'></p>
+                            {auth.isAuthenticated?(                            
+                            <button className='cta-button-container center' style={{borderRadius: '50px'}}> 
+                                <div className='w-max-content center pointer row no-space align-items-center'>
+                                    <div className='w-max-content no-space'><p className='font-p tipTitle no-space'>User : {auth.email}</p></div>
+                                </div>
+                            </button>):(
                             <button className='cta-button-container center' onClick={goToLogin}> 
                                 <div className='w-max-content center pointer row no-space align-items-center'>
                                     <div className='w-max-content no-space'><p className='font-p tipTitle no-space'>Sign In</p></div>
                                     <div className='w-max-content no-space'><img className='caretIcon no-space' src={caretWhite} /></div>
                                 </div>
-                            </button>
+                            </button>)}
+
                         </div>
                     </div>
                 </div>
