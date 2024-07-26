@@ -2,6 +2,7 @@ import React,{ useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Twirl as Hamburger } from 'hamburger-react';
 import Overlay from '../overlay';
+import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faArrowAltCircleRight, faShoppingCart,faUser } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +14,7 @@ import { useAuth } from '../../navigation/AuthContext';
 function Header(): React.JSX.Element {
     let auth = useAuth()
     console.log('auth', auth.isAuthenticated)
+    const {triggerInfo,triggerError,triggerSuccess} = useNotificationTrigger() 
     const [isOpen, setOpen] = useState(false)
     const [showDesktopMenu,setShowDesktopMenu] = useState(false)
     const toggleDesktopMenu = () =>{
@@ -57,9 +59,6 @@ function Header(): React.JSX.Element {
         navigate('/signup')
     }
 
-    
-    
-
     return (
         <div className='container-fluid no-space'>
             <div className='row no-space align-items-center green-bg header-container'>
@@ -99,7 +98,7 @@ function Header(): React.JSX.Element {
                 {auth.isAuthenticated?
                 (
                     <div className='d-none d-sm-block w-max-content no-space pointer userButtonContainer'>
-                        <p className='font-p font-regular deep-green' onClick={toggleDesktopMenu}><FontAwesomeIcon icon={faUser} /> adefuyeabayomi16@gmail.com {showDesktopMenu? <FontAwesomeIcon icon={faAngleUp}/>:<FontAwesomeIcon icon={faAngleDown} /> }</p>
+                        <p className='font-p font-regular deep-green' onClick={toggleDesktopMenu}><FontAwesomeIcon icon={faUser} /> {auth.email} {showDesktopMenu? <FontAwesomeIcon icon={faAngleUp}/>:<FontAwesomeIcon icon={faAngleDown} /> }</p>
                         {
                             showDesktopMenu ? (
                         <div className='userOptionsDesktopContainer shadow p-2'>
@@ -107,12 +106,13 @@ function Header(): React.JSX.Element {
                                 <p className='font-p font-medium'>Account Activities</p>
                                 <div className='util-divider' />
                                 <p className='font-small font-regular pointer' onClick={()=>{
+                                    toggleDesktopMenu()
+                                    triggerInfo({title:'Log Out',message: 'You have successfully logged out'})
                                     auth.logout()
                                 }}>Logout</p>
                             </div>
                         </div>) : null
                         }
-                       
                     </div>
                 ):(
                 <div className='d-none d-sm-block w-max-content no-space'>

@@ -11,13 +11,15 @@ import facebookIcon from '../../assets/icons8-facebook.svg'
 import googleIcon from '../../assets/icons8-google.svg'
 import xIcon from '../../assets/icons8-x.svg'
 
-import './style.css'
+import './style.css' 
 import { authService } from "joegreen-service-library";
-
+import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
+ 
 export default function Login (): React.JSX.Element {
     const navigate = useNavigate();
     const { login } = useAuth();
     const { setLoading, setLoadingText } = useLoading();
+    const {triggerInfo,triggerError,triggerSuccess} = useNotificationTrigger() 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState<boolean>(false);
@@ -56,9 +58,11 @@ export default function Login (): React.JSX.Element {
     
         try {
           const response = await authService.login(email, password);
-          login(response.token);
+          login(response.token,email);
+          triggerInfo({title: 'Login Success',message: 'Your Login is successful. You can now use the full functions of the site'})
           navigate('/');
         } catch (error) {
+            triggerError({title: 'Login Error',message: error.message})
           console.error("Login error:", error);
         } finally {
           setLoading(false);

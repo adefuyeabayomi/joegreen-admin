@@ -4,11 +4,9 @@ import { authService } from 'joegreen-service-library'
 // Define the shape of your auth context
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (token:string) => void;
+  login: (token:string,email:string) => void;
   logout: () => void;
-}
-interface isValidResponseType {
-  isValid: boolean
+  email: string,
 }
 
 // Create the context with initial values
@@ -29,13 +27,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   //default auth state is not authenticated. then use effect checks if there is an accessToken
   // if it exists, then i check to see if it is valid and not expired, if it is not expired, then the state can be updated to true, othewise it stays in false, and the expired message is displayed.
   let accessToken: string | undefined = window.localStorage.getItem('accessToken')
+  let emailFromStore: string | undefined = window.localStorage.getItem('email')
+  const [email,setEmail] = useState(emailFromStore)
+  
   async function checkValidity (): Promise<void>{
     try{
       let response = await authService.isValid(accessToken)
       if(response.isValid){
         setIsAuthenticated(true)
       }
-
       console.log({response})
     }
     catch(err){
@@ -44,18 +44,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
   useEffect(()=>{
     if(accessToken){
-      console.log('user has logged in before')
+      console.log('user')
       checkValidity()
     }  
     else {
-      console.log('user has not logged in previously')
+      console.log('user')
     }  
   },[])
 
-
-  const login = (accessToken: string) => {
+  const login = (accessToken: string,email: string) => {
     setIsAuthenticated(true);
+    setEmail(email)
     window.localStorage.setItem('accessToken',accessToken)
+    window.localStorage.setItem('email',email)
   };
 
   const logout = () => {
@@ -64,7 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, email }}>
       {children}
     </AuthContext.Provider>
   );

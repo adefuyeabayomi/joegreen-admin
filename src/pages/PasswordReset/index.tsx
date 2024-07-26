@@ -10,13 +10,14 @@ import { isValidEmail, generateRandomString, isStringLengthGreaterThan } from ".
 import { authService } from "joegreen-service-library";
 
 import { useLoading } from "../../components/utils/loadingContext";
-import { useAuth } from "../../navigation/AuthContext";
-
-import './style.css'
+import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
+ 
+import './style.css' 
 
 export default function PasswordReset (): React.JSX.Element {   
     const navigate = useNavigate();
     const { setLoading, setLoadingText } = useLoading();
+    const {triggerInfo,triggerError,triggerSuccess} = useNotificationTrigger() 
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState<boolean>(false);
     const [searchParams] = useSearchParams();
@@ -42,8 +43,10 @@ export default function PasswordReset (): React.JSX.Element {
         setLoadingText("Updating Password...");
         try {
           const response = await authService.resetPassword(resetToken,password);
-          navigate('/');
+          triggerInfo({title: 'Success',message: 'Your password has been saved successfully. You can now login with your new password'})
+          navigate('/login');
         } catch (error) {
+          triggerError({title: 'Reset Error',message: error.message})
           console.error("Error Updating Password:", error);
         } finally {
           setLoading(false);

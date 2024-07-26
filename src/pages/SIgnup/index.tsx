@@ -12,10 +12,12 @@ import { useAuth } from "../../navigation/AuthContext";
 import facebookIcon from '../../assets/icons8-facebook.svg'
 import googleIcon from '../../assets/icons8-google.svg'
 import xIcon from '../../assets/icons8-x.svg'
-
+import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
+ 
 export default function Signup(): React.JSX.Element {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const {triggerInfo,triggerError,triggerSuccess} = useNotificationTrigger() 
   const { setLoading, setLoadingText } = useLoading();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -52,9 +54,11 @@ export default function Signup(): React.JSX.Element {
 
     try {
       const response = await authService.adminSignup(email, password);
-      login(response.token);
+      login(response.token,email);
+      triggerInfo({title: 'Signup Success',message: 'Your Signup is successful. You can now use the full functions of the site'})
       navigate('/');
     } catch (error) {
+        triggerError({title: 'Login Error',message: error.message})
       console.error("Signup error:", error);
     } finally {
       setLoading(false);
@@ -85,6 +89,7 @@ export default function Signup(): React.JSX.Element {
                                 </div>
                                 <div className="py-2" />
                                 <div className="green-divider"></div>
+                                <div className="py-2" />
                                 <div className="py-2" />
                                 <div className="socialButtonContainer pointer container-fluid">
                                     <div className="row no-space align-items-center">

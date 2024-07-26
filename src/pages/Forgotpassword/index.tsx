@@ -5,16 +5,18 @@ import { isValidEmail } from "../../functions/utils";
 import { authService } from "joegreen-service-library";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faAt, faEnvelope} from '@fortawesome/free-solid-svg-icons'
-
+ 
 import { useLoading } from "../../components/utils/loadingContext";
-import { useAuth } from "../../navigation/AuthContext";
+import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
 
-import './style.css'
+import './style.css' 
 
-export default function ForgotPassword (): React.JSX.Element {   const navigate = useNavigate();
+export default function ForgotPassword (): React.JSX.Element {   
+  const navigate = useNavigate();
     const { setLoading, setLoadingText } = useLoading();
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState<boolean>(false);
+    const {triggerInfo,triggerError,triggerSuccess} = useNotificationTrigger() 
   
     const resetEmailError = () => {
       setEmailError(false);
@@ -32,9 +34,11 @@ export default function ForgotPassword (): React.JSX.Element {   const navigate 
     
         try {
           const response = await authService.forgotPassword(email);
+          triggerInfo({title: 'Email Sent Successfully',message: 'Your password reset link has been sent. Use it to reset your password.'})
           navigate('/');
         } catch (error) {
           console.error("Error sending reset link:", error);
+          triggerError({title: 'An Error Occured',message: error.message})
         } finally {
           setLoading(false);
         }
@@ -54,14 +58,14 @@ export default function ForgotPassword (): React.JSX.Element {   const navigate 
                                 <div className="py-2" />
                                 <div>
                                     <InputMain onFocus={resetEmailError} showError={emailError} errorMessage="Email is invalid" icon={<FontAwesomeIcon color="#aeaeae" icon={faAt} />} value={email} onChange={setEmail} placeholder={'UserID/Email'} />
-                                </div>             
+                                </div>
                                 <div className="py-2" />
                                 <div className='no-space'>
                                     <button onClick={sendForgotPassword} className='pointer green-bg-main login-button '>Send Reset Email</button>
                                 </div>
                                 <div className="py-2" />
                                 <div>
-                                    <p className="font-small text-center no-space"><span className="font-regular pointer">I didn't get Any Mail. Resend it</span> </p>
+                                    <p className="font-small text-center no-space" onClick={sendForgotPassword}><span className="font-regular pointer">I didn't get Any Mail. Resend it</span> </p>
                                 </div>
                                 <div className="py-2" />
 
