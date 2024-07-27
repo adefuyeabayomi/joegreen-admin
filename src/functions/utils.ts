@@ -1,3 +1,4 @@
+import axios from "axios";
 // Function to check if an email is valid
 export function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -20,4 +21,26 @@ export function isValidEmail(email: string): boolean {
     return str.length > minLength;
   }
 
+  export function isValidUrl(url) {
+    const regex = /^(https?:\/\/)?([^\s$.?#].[^\s]*)$/i;
+    return regex.test(url);
+  }
+
+  async function isUrlReachable(url) {
+    try {
+      await axios.head(url, { timeout: 5000 }); // Set a timeout for the request
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function checkUrl(url) {
+    if (!isValidUrl(url)) {
+      return { valid: false, reachable: false };
+    }
+    
+    const reachable = await isUrlReachable(url);
+    return { valid: true, reachable };
+  }
   

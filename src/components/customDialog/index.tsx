@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import './style.css'; // Make sure to create a corresponding CSS file for styling
 
-const CustomDialog = ({ isOpen, onClose, children }) => {
+const CustomDialog = ({ isOpen, onClose, children=<div></div> }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {

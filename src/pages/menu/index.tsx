@@ -11,9 +11,6 @@ import { useNotificationTrigger } from "../../components/utils/notificationTrigg
 import { dishService } from "joegreen-service-library";
 import { useLoading } from "../../components/utils/loadingContext";
 
-import image26 from '../../assets/image26.png'
-let image = <img src={image26}/>
-
 export function ManageMenu (): React.JSX.Element {
     let navigate = useNavigate()
     let {triggerError,triggerSuccess} = useNotificationTrigger()

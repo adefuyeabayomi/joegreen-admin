@@ -14,6 +14,7 @@ export function CreateDish(): React.JSX.Element {
     let navigate = useNavigate();
     const [searchParams] = useSearchParams();
     let category = searchParams.get('category')
+    const [editId, setEditId] = useState<string | null>(null);
     const { setLoading, setLoadingText } = useLoading();
     const { triggerInfo, triggerError, triggerSuccess } = useNotificationTrigger();
     const [dishName, setDishName] = useState('');
@@ -24,7 +25,6 @@ export function CreateDish(): React.JSX.Element {
     const [dishNameError, setDishNameError] = useState<boolean>(false);
     const [dishDescError, setDishDescError] = useState<boolean>(false);
     const [dishPriceError, setDishPriceError] = useState<boolean>(false);
-    const [editId, setEditId] = useState<string | null>(null);
 
     useEffect(() => {
         const id = searchParams.get('editId');
@@ -65,6 +65,9 @@ export function CreateDish(): React.JSX.Element {
         const newAddOns = addOns.filter((_, i) => i !== index);
         setAddOns(newAddOns);
     };
+    const handleGoBack = () => {
+        navigate(-1); // Go back one page
+      };
 
     const handleCreateOrUpdateDish = async () => {
         if (isStringLengthGreaterThan(dishName, 5) &&
@@ -73,7 +76,7 @@ export function CreateDish(): React.JSX.Element {
             
             try {
                 setLoading(true);
-                setLoadingText('Adding Dish');
+                setLoadingText('Proceessing...'+editId?'Creating Dish' : 'Updating Dish');
                 
                 const dishData = {
                     name: dishName,
@@ -87,6 +90,7 @@ export function CreateDish(): React.JSX.Element {
                     // Update existing dish
                     await dishService.updateDish(editId, dishData, token);
                     triggerSuccess({ title: 'Success', message: 'Dish updated successfully' });
+                    console.log({editId})
                     await dishService.updateDishImage(editId,selectedImage,token)
                     triggerSuccess({ title: 'Success', message: 'Dish Image updated successfully' });
                 } else {
@@ -96,10 +100,11 @@ export function CreateDish(): React.JSX.Element {
                     await dishService.updateDishImage(added._id,selectedImage,token)
                     triggerSuccess({ title: 'Success', message: 'Dish Image updated successfully' });
                 }
-                navigate('/');
+                handleGoBack()
             } catch (error) {
                 triggerError({ title: 'Error', message: 'Failed to save dish' });
                 console.error(error);
+                handleGoBack()
             } finally {
                 setLoading(false);
             }
