@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Dish } from "joegreen-service-library/dist/services/dishService";
-
-import './style.css'
-import OrderItem from "../../components/orderItem";
 import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
 import { dishService } from "joegreen-service-library";
 import { useLoading } from "../../components/utils/loadingContext";
+
+import './style.css'
+import OrderItem from "../../components/orderItem";
 
 export function ManageMenu (): React.JSX.Element {
     let navigate = useNavigate()
@@ -34,6 +34,7 @@ export function ManageMenu (): React.JSX.Element {
     useEffect(()=>{
         getCategories()
     },[])
+
     function goToMenuCategory(id:string){
         navigate('/menu-category?id='+id)
     }

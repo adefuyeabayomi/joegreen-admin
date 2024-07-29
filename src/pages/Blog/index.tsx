@@ -7,7 +7,6 @@ import { faEye, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { BlogItem } from "../../components/blogItem";
 import { blogService } from "joegreen-service-library";
 import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
-import { dishService } from "joegreen-service-library";
 import { useLoading } from "../../components/utils/loadingContext";
 import { useSearchParams } from "react-router-dom";
 import { BlogType } from "joegreen-service-library/dist/services/blogService";

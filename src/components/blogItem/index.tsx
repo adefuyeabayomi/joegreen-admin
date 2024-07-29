@@ -19,7 +19,7 @@ interface FeaturedCardPropType {
 
 export function BlogItem ({created,editFn,publishFn,deleteBlog,image,title,actionFn, description='',published = false}: FeaturedCardPropType): React.JSX.Element {
     let [deleteConfirm,setDeleteConfirm] = useState(false)
-    let formattedDate = String(new Date(created))
+    let formattedDate = String(new Date(created)).split(' ').slice(0,4).join(' ')
 
     function toggleDeleteConfirm(){
         setDeleteConfirm(!deleteConfirm)
