@@ -17,7 +17,7 @@ import { MenuCategory } from '../pages/MenuCategory';
 import { CreateBlog } from '../pages/CreateBlog';
 import ForgotPassword from '../pages/Forgotpassword';
 import Login from '../pages/Login';
-import Signup from '../pages/SIgnup';
+import Signup from '../pages/Signup';
 import PasswordReset from '../pages/PasswordReset';
 
 

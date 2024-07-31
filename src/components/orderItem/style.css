@@ -44,10 +44,10 @@
 }
 
 .orderCheckOutItemContainer{
-    max-width: 370px;
-    box-shadow: 0px 0px 8px rgb(165, 202, 228);
+    box-shadow: 0px 0px 8px rgb(203, 218, 229);
     border: 0px solid;
     border-radius: 10px;
+    padding: 15px 20px;
 }
 .OCIImageContainer{
     padding: 5px;

@@ -1,12 +1,31 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { orderService } from "joegreen-service-library";
+import { Order } from "joegreen-service-library/dist/services/orderService";
+import moment from 'moment';
 
 import './style.css'
 
 export function ManageOrders (): React.JSX.Element {
+    let token = window.localStorage.getItem('accessToken')
     let navigate = useNavigate()
-    function goToViewOrder(){
-        navigate('/view-order')
+    let [orders,setOrders]= useState<Order[]>([])
+    function goToViewOrder(id){
+        navigate(`/view-order?order=${id}`)
+    }
+    useEffect(()=>{
+        console.log('fetching orders')
+        orderService.fetchOrders(token,{paymentStatus: 'Completed', fulfilled: false}).then(orders=>{
+            console.log({orders});
+            setOrders(orders)
+        })
+    },[])
+    if(orders.length == 0){
+        return (
+            <div>
+                No Orders Present!
+            </div>
+        )
     }
     return (
         <div>
@@ -55,166 +74,44 @@ export function ManageOrders (): React.JSX.Element {
                                     </p>
                                 </div>
                             </div>
-                            <div className="row no-space align-items-center py-2 px-2 tx-item-row gray my-2 my-sm-0">
+                            {orders.map((x,index)=>{
+                                return (
+
+                            <div className={`row no-space align-items-center py-2 px-2 tx-item-row ${index%2 == 0 ? 'gray' : ''} my-2 my-sm-0`}>
                                 <div className="w-max-content d-none d-sm-block no-space">
                                     <p className="font-p font-regular no-space snWidth">
-                                        1
+                                        {index + 1} 
                                     </p>
                                 </div>
                                 <div className="col-xs-12 col-sm no-space">
                                     <p className="font-p font-regular no-space">
-                                        <span className="d-sm-none">Date: </span><span>02/03/2024</span>
+                                        <span className="d-sm-none">Date: </span><span>{moment(x.createdAt).format("MMM Do YY")}</span>
                                     </p>
                                 </div>
                                 <div className="col-xs-12 col-sm no-space">
                                     <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Time: </span><span>12:03am</span>
+                                    <span className="d-sm-none">Time: </span><span>{moment(x.createdAt).startOf('hour').fromNow()}</span>
                                     </p>
                                 </div>
                                 <div className="col-xs-12  col-sm no-space">
                                     <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Order ID: </span><span>Prxi2938928918de3</span>
+                                    <span className="d-sm-none">Order ID: </span><span>{x._id}</span>
                                     </p>
                                 </div>
                                 <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Status: </span><span>Pending</span>
+                                    <p className="font-p font-regular no-space px-2">
+                                    <span className="d-sm-none">Status: </span><span>{x.fulfilled ? 'Fulfilled': 'Pending'}</span>
                                     </p>
                                 </div>
                                 <div className="col-xs-12 col-sm no-space">
                                     <p className="font-p font-regular no-space">
-                                    <button onClick={goToViewOrder} className="vi-button">View Order</button>
+                                    <button onClick={()=>goToViewOrder(x._id)} className="vi-button">View Order</button>
                                     </p>
                                 </div>
                             </div>
-                            <div className="row no-space align-items-center py-2 px-2 tx-item-row my-2 my-sm-0">
-                                <div className="w-max-content d-none d-sm-block no-space">
-                                    <p className="font-p font-regular no-space snWidth">
-                                        1
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                        <span className="d-sm-none">Date: </span><span>02/03/2024</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Time: </span><span>12:03am</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Order ID: </span><span>Prxi2938928918de3</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Status: </span><span>Pending</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <button onClick={goToViewOrder} className="vi-button">View Order</button>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="row no-space align-items-center py-2 px-2 tx-item-row gray my-2 my-sm-0">
-                                <div className="w-max-content d-none d-sm-block no-space">
-                                    <p className="font-p font-regular no-space snWidth">
-                                        1
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                        <span className="d-sm-none">Date: </span><span>02/03/2024</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Time: </span><span>12:03am</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Order ID: </span><span>Prxi2938928918de3</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Status: </span><span>Pending</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <button onClick={goToViewOrder} className="vi-button">View Order</button>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="row no-space align-items-center py-2 px-2 tx-item-row my-2 my-sm-0">
-                                <div className="w-max-content d-none d-sm-block no-space">
-                                    <p className="font-p font-regular no-space snWidth">
-                                        1
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                        <span className="d-sm-none">Date: </span><span>02/03/2024</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Time: </span><span>12:03am</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Order ID: </span><span>Prxi2938928918de3</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Status: </span><span>Pending</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <button onClick={goToViewOrder} className="vi-button">View Order</button>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="row no-space align-items-center py-2 px-2 tx-item-row gray my-2 my-sm-0">
-                                <div className="w-max-content d-none d-sm-block no-space">
-                                    <p className="font-p font-regular no-space snWidth">
-                                        1
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                        <span className="d-sm-none">Date: </span><span>02/03/2024</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Time: </span><span>12:03am</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Order ID: </span><span>Prxi2938928918de3</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12  col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <span className="d-sm-none">Status: </span><span>Pending</span>
-                                    </p>
-                                </div>
-                                <div className="col-xs-12 col-sm no-space">
-                                    <p className="font-p font-regular no-space">
-                                    <button onClick={goToViewOrder} className="vi-button">View Order</button>
-                                    </p>
-                                </div>
-                            </div>
+
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

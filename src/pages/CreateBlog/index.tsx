@@ -11,14 +11,14 @@ import './style.css';
 
 export function CreateBlog(): React.JSX.Element {
     const token = window.localStorage.getItem('accessToken')
-    const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
-    const { setLoading, setLoadingText } = useLoading();
-    const { triggerInfo, triggerError, triggerSuccess } = useNotificationTrigger();
+    const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
+    const { setLoading, setLoadingText } = useLoading()
+    const { triggerInfo, triggerError, triggerSuccess } = useNotificationTrigger()
     
-    const [title, setTitle] = useState('');
-    const [link, setLink] = useState('https://');
-    const [highlightParagraph, setHighlightParagraph] = useState('');
+    const [title, setTitle] = useState('')
+    const [link, setLink] = useState('https://')
+    const [highlightParagraph, setHighlightParagraph] = useState('')
     const [image, setImage] = useState<File | null>(null);
     const [editId, setEditId] = useState<string | null>(null);
     const [titleError, setTitleError] = useState<boolean>(false);
@@ -39,6 +39,7 @@ export function CreateBlog(): React.JSX.Element {
             const response = await blogService.getBlogPostById(id);
             setTitle(response.title);
             setHighlightParagraph(response.highlightParagraph);
+            setLink(response.link)
             // Set the image preview if needed
         } catch (error) {
             triggerError({ title: 'Error', message: 'Failed to fetch blog data' });
