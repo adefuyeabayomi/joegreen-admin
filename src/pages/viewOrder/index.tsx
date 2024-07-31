@@ -17,20 +17,22 @@ export function ViewOrder (): React.JSX.Element {
     return (
         <div>            
         <CustomDialog isOpen={isDialogOpen} onClose={closeDialog}>
-        <div className="py-1" />
-        <p className="font-subtitle font-bold">Confirm Order Successfully fulfilled</p>
-        <p className="font-p font-regular">The client would be notified that their order has been fulfilled and currently on the way.</p>
-        <div className="container-fluid no-space">
-            <div className="row no-space">
-                <div className="col-12 col-md-6 no-space">
-                    <button className="ATCMButton Continue font-small font-regular pointer" onClick={()=>{}}>Mark As Fufilled</button>
-                </div>
-                <div className="col-12 col-md-6 no-space px-1">
-                    <button className="ATCMButton PTC font-small font-regular pointer" onClick={()=>{}}>Cancel</button>
+            <div>
+            <div className="py-1" />
+            <p className="font-subtitle font-bold">Confirm Order Successfully fulfilled</p>
+            <p className="font-p font-regular">The client would be notified that their order has been fulfilled and currently on the way.</p>
+            <div className="container-fluid no-space">
+                <div className="row no-space">
+                    <div className="col-12 col-md-6 no-space">
+                        <button className="ATCMButton Continue font-small font-regular pointer" onClick={()=>{}}>Mark As Fufilled</button>
+                    </div>
+                    <div className="col-12 col-md-6 no-space px-1">
+                        <button className="ATCMButton PTC font-small font-regular pointer" onClick={()=>{}}>Cancel</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className="py-2" />
+            <div className="py-2" />
+            </div>
     </CustomDialog>
             <div className="mainSpacing">
                 <div className="py-3" />

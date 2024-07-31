@@ -8,6 +8,7 @@ import { isStringLengthGreaterThan } from "../../functions/utils";
 import { useLoading } from "../../components/utils/loadingContext";
 import { useNotificationTrigger } from "../../components/utils/notificationTrigger";
 import { dishService } from 'joegreen-service-library';
+import {Dish, Addons} from 'joegreen-service-library/dist/services/dishService'
 
 export function CreateDish(): React.JSX.Element {
     const token = window.localStorage.getItem('accessToken');
@@ -20,7 +21,7 @@ export function CreateDish(): React.JSX.Element {
     const [dishName, setDishName] = useState('');
     const [dishDescription, setDishDescription] = useState('');
     const [dishPrice, setDishPrice] = useState<number>(0);
-    const [addOns, setAddOns] = useState<{ name: string; price: number }[]>([]);
+    const [addOns, setAddOns] = useState<Addons[]>([]);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [dishNameError, setDishNameError] = useState<boolean>(false);
     const [dishDescError, setDishDescError] = useState<boolean>(false);
@@ -58,7 +59,7 @@ export function CreateDish(): React.JSX.Element {
     };
 
     const handleAddOnAdd = () => {
-        setAddOns([...addOns, { name: '', price: 0 }]);
+        setAddOns([...addOns, { name: '', price: 0, quantity: 0, _id: '' }]);
     };
 
     const handleAddOnDelete = (index: number) => {
