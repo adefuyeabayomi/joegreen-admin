@@ -4,6 +4,7 @@ import { animateScroll as scroll } from 'react-scroll';
 import scrollToElement from 'scroll-to-element';
 import HowItem from '../../components/HowItem';
 import {useAuth} from '../../navigation/AuthContext'
+import axios from 'axios'
 //images
 import tipDots from '../../assets/tipDots.png'
 import caretWhite from '../../assets/caret-white.png'
@@ -40,6 +41,8 @@ function Home(): React.JSX.Element {
     }
 
       useEffect(() => {
+        
+    axios.get('https://joegreen-express-server.onrender.com/')
         scroll.scrollToTop({
           duration: 1500, // duration of the scrolling animation in milliseconds
           smooth: 'easeInOutQuart', // the type of easing
